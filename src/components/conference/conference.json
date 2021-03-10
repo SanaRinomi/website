@@ -1,0 +1,23 @@
+{
+    "title": "International Women's Day Challenge",
+    "pageTitle": "Conference | The Live Coders",
+    "description": "The Live Coders presents International Women's Day Challenge",
+    "date": "2021-03-08",
+    "starts": "00:00",
+    "ends": "23:59",
+    "sponsorTiers": [
+        {
+            "name": "Silver",
+            "priority": 1,
+            "size": "full",
+            "sponsors": [
+                {
+                    "name": "Progress",
+                    "logo": "Progress_Sponsor_White.png",
+                    "alt": "Deliver better experiences powered by your apps, data and content with Progress",
+                    "url": "https://www.progress.com/"
+                }
+            ]
+        }
+    ]
+}

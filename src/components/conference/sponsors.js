@@ -1,5 +1,6 @@
-import React from "react"
+import React, {Component} from "react"
 import styled from "styled-components"
+import LoadingIcon from "../../img/icons/loop_white.svg"
 let data = require("./sponsors.json") // Information has been updated with current event sponsors.
 
 let teams = new Map()
@@ -68,7 +69,7 @@ const SponsorWrapper = styled.article`
     padding: 1vh 0;
   }
 
-  img {
+  picture {
     max-width: 20vw;
   }
 
@@ -80,7 +81,7 @@ const SponsorWrapper = styled.article`
     margin: 5vh 5vw;
     padding: 0;
 
-    img {
+    picture {
       max-width: 90vw !important;
     }
 
@@ -94,13 +95,46 @@ const SponsorWrapper = styled.article`
   }
 `
 
-const Sponsor = ({ item }) => (
-  <SponsorWrapper>
-    <a href={item.url} target="_blank" rel="noreferrer" className={item.background ? `white-bkg level-${item.level.toLowerCase()}` : "level-" + item.level.toLowerCase()}>
-      <img src={item.logo} alt={item.alt} />
-    </a>
-  </SponsorWrapper>
-)
+class Sponsor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { image: null };
+  }
+
+  async componentDidMount() {
+    try {
+      const img = await import(`../../img/sponsors/${this.props.item.logo}`);
+      this.setState({image: img.default || img})
+    }
+    catch (e) {
+      console.error(e)
+    }
+  }
+
+  render() {
+    const item = this.props.item;
+
+    return (
+      <SponsorWrapper>
+        <a href={item.url} target="_blank" rel="noreferrer" className={item.background ? `white-bkg level-${item.level.toLowerCase()}` : "level-" + item.level.toLowerCase()}>
+          <img src={this.state.image || LoadingIcon} alt={item.alt} key={item.logo} />
+        </a>
+      </SponsorWrapper>
+    )
+  }
+}
+
+/** const Sponsor = async ({ item }) => {
+  const image = await import(item.logo)
+
+  return (
+    <SponsorWrapper>
+      <a href={item.url} target="_blank" rel="noreferrer" className={item.background ? `white-bkg level-${item.level.toLowerCase()}` : "level-" + item.level.toLowerCase()}>
+        <img src={data.file.childImageSharp.fluid} alt={item.alt} key={item.logo} />
+      </a>
+    </SponsorWrapper>
+  )
+} **/
 
 export default () => (
   <>
@@ -109,8 +143,8 @@ export default () => (
       <>
         <h3>{sponsors[0]} Sponsors</h3>
         <SponsorGrid>
-          {sponsors[1].map((sponsor, index) => (
-            <Sponsor item={sponsor} key={index} />
+          {sponsors[1].map((sponsor) => (
+            <Sponsor item={sponsor} key={sponsor.name} />
           ))}
         </SponsorGrid>
       </>

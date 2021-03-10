@@ -7,8 +7,8 @@ import styled from "styled-components"
 import Header from "../components/header"
 import Footer from "../components/footer"
 
-import IwdImg from "../img/iwd-header.jpg"
-import OgImage from "../img/og-iwd-image-gmt.jpg"
+import IwdImg from "../img/conference/iwd-header.jpg"
+import OgImage from "../img/conference/og-iwd-image-gmt.jpg"
 
 import Schedule from "../components/conference/schedule"
 import Speakers from "../components/conference/speakers"

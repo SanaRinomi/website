@@ -103,7 +103,7 @@ class Sponsor extends Component {
 
   async componentDidMount() {
     try {
-      const img = await import(`../../img/sponsors/${this.props.item.logo}`);
+      const img = await import(`../../img/conference/sponsors/${this.props.item.logo}`);
       this.setState({image: img.default || img})
     }
     catch (e) {
